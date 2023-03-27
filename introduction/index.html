@@ -92,7 +92,86 @@
         console.log(parseInt(unPrenom));
         console.log(parseFloat(unPrenom));
 
-        
+        /**
+         * Opérateurs
+         * 
+         * Mathématiques
+         * 
+         * + /!\ ATTENTION /!\ aussi utilisé "avant" pour la concaténation
+         * - 
+         * / division
+         * % modulo (reste d'une division entière)
+         * * multiplication
+         * ** opérateur d'exponentiation
+         *   Math.pow(2,3) => 2**3 = 8
+         * 
+         * Incrémentation et décrémentation
+         * ++ et --
+         * ++variable variable++
+         * --variable variable--
+         * 
+        */
+
+        let nombreIncrement = 12;
+        nombreIncrement++; /* passe à 13 */
+        console.log(nombreIncrement);
+        console.log(nombreIncrement++); /* affiche 13 puis passe à 14 */
+        console.log(nombreIncrement);
+        console.log(++nombreIncrement); /* passe de 14 à 15 et ensuite affiche le 15 */
+
+        /**
+         * 
+         * Logiques
+         * 
+         * &&       => ET
+         *          => a = true et b = true
+         *          => a && b   => true
+         *          => !a && b  => false
+         *          => a && !b  => false
+         *          => !a && !b  => false
+         * 
+         * ||       => OU 
+         *          => a = true et b = true
+         *          => a || b   => true
+         *          => !a || b  => true
+         *          => a || !b  => true
+         *          => !a || !b  => false
+         * 
+         * ^        => OU EXCLUSIF BINAIRE (XOR)
+         *          => a = true et b = true
+         *          => a ^ b   => false
+         *          => !a ^ b  => true
+         *          => a ^ !b  => true
+         *          => !a ^ !b  => false
+         * 
+         * Comparaison
+         * 
+         * <
+         * >
+         * <=
+         * >=
+         * 
+         * ==   !=  => Non stricte : on compare les valeurs mais pas le type
+         * ===  !== => Stricte : on compare les valeurs et le type
+         * 
+        */
+
+        console.log('2' == 2);
+        console.log('2' === 2);
+        console.log('3' != 2);
+        console.log('2' != 2);
+        console.log('3' !== 2);
+        console.log('2' !== 2);
+
+        /* yoda */
+        /*
+        //en java
+        String a = 'Chaîne';
+        a.equals('Chaîne'); // true
+        String b = null;
+        b.equals('Chaîne'); // retourne NullPointerException
+        'Chaîne'.equals(b); // false
+        */
         
     </script>
 </head>
