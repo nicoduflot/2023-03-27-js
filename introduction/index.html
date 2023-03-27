@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation JS - ES</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+        // Commentaires en une ligne
+
+        /*
+        Commentaire en bloc
+        */
+        console.log('la console, il faudra échapper des caractères spéciaux, exemple l\'apostrophe');
+        var prenom = 'Jean';
+        console.log(prenom);
+
+        let nom = 'Neige';
+
+        function affPrenom(){
+            let prenom = 'tata';
+            console.log(prenom);
+            let nom = 'test';
+            console.log(nom);
+            prenom = 'tutu';
+        }
+
+        affPrenom();
+
+        console.log(prenom);
+        console.log(nom);
+        
+        const HOSTFR = '127.123.0.56';
+        const HOSTEN = '127.125.0.32';
+        const HOSTFRNAME = 'fr-admin@123.12';
+        const HOSTENNAME = 'en-admin@196.10';
+        
+        let monObjet = {
+            unNombre: 42,
+            unChaine: 'Tata',
+            maMethode: function(){
+                console.log('hello World');
+            }
+        };
+
+        monObjet.maMethode();
+        console.log(monObjet.unNombre);
+        monObjet.unNombre = 12;
+        console.log(monObjet.unNombre);
+
+        console.log(Math.pow(2,3));
+
+        /**
+         * JS est un langage prototypé
+        */
+
+        let tab = ['haha', 'hoho', 'hihi'];
+        console.log(tab);
+        console.table(tab);
+        
+        console.log(typeof tab);
+        
+        /**
+         * JS est un langage "non typé"
+         * 
+         * Types
+         * [Primitifs]
+         * number   -> nombres (entier, à virgule flottante, big int)
+         * bool     -> Bouléen (true or false);
+         * 
+         * [Références]
+         * String   -> chaîne de caractère
+         * Array    -> tableau
+         * Objects  -> objet
+         * JSON     -> Javascript Object Notation
+         * 
+        */
+
+        
+        let unPrenom = 'Jean';
+        console.log(typeof unPrenom);
+        
+        unPrenom = 12.3;
+        console.log(typeof unPrenom);
+        
+        unPrenom = '12.3';
+        console.log(typeof unPrenom);
+        
+        console.log(typeof parseInt(unPrenom));
+        console.log(parseInt(unPrenom));
+        console.log(parseFloat(unPrenom));
+
+        
+        
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../introduction/index.html">Premiers scripts</a></li>
+                            <li><a class="dropdown-item" href="../introduction/tableaux.html">Les tableaux</a></li>
+                            <li><a class="dropdown-item" href="../introduction/fonctions.html">Les fonctions</a></li>
+                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La destructuration</a></li>
+                            <li><a class="dropdown-item" href="../introduction/storage.html">Le storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            LE DOM
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../dom/index.html">DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM & CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Dataset</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            AJAX
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../ajax/index.html">Les promesses</a></li>
+                            <li><a class="dropdown-item" href="../ajax/fetch.html">AJAX avec Fetch()</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <div class="col">
+                <article class="card">
+                    <header class="card-header">
+                        <h2>Variables &amp; opérateurs</h2>
+                    </header>
+                    <main class="card-body">
+                        <h3>Ecmascript</h3>
+                        <p>
+                            Ecmascript (es) est une norme sur laquelle s'appuie JS. (ActionScript => flash, TypeScript).
+                        </p>
+                        <p>
+                            La dernière norme ecmascript es7 (2017, très peu de différences avec es6)
+                        </p>
+                        <ul>
+                            <li>es1 - 1997</li>
+                            <li>es2 - 1999</li>
+                            <li>es4 - version abandonnée</li>
+                            <li>es5 - 2009</li>
+                            <li>es6 - 2015</li>
+                            <li>es7 - 2017</li>
+                        </ul>
+                        <p>
+                            Jusqu'en 2010, JS était mal considéré par les développeurs ( peu normé, trop permissif )
+                        </p>
+                        <p>
+                            L'arrivée de Google Chrome, avec en plus l'envie de Google de refaire fonctionner
+                            correctement JS.
+                            Création du moteur d'interprétation V8.
+                            => un boost des capacitées de JS et son éxécution
+                        </p>
+                        <p>
+                            Grâce au V8, des nouveau langages ou méthodes de développement sont arrivées, notemment
+                            NodeJs (2009),
+                            qui s'appuis sur JS mais s'éxécute sur le serveur
+                        </p>
+                        <p>
+                            La convention du code en es6 est visible sur Github
+                            <a href="https://github.com/elierotenberg/coding-styles/blob/master/es6.md" target="_blank">
+                                es6
+                            </a>
+                        </p>
+                    </main>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
