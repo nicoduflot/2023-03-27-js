@@ -349,6 +349,68 @@
         
         let tempFruit = '';
 
+        let fruitEtLegumes3 = fruitEtLegumes.slice();
+
+        fruitEtLegumes.sort();
+        let fruitEtLegumes2 = fruitEtLegumes.slice();
+        console.log(fruitEtLegumes);
+
+        fruitEtLegumes.map(function(value){
+            console.log(value);
+            if(value !== tempFruit){
+                tabTemp.push([value, 1]);
+                tempFruit = value;
+            }else{
+                for(fruit of tabTemp){
+                    if(fruit[0] === value ){
+                        fruit[1] = fruit[1] + 1;
+                    }
+                }
+            }
+        });
+
+        console.table(tabTemp);
+        fruitEtLegumes.splice(0, fruitEtLegumes.length);
+
+        tabTemp.map(function(value){
+            fruitEtLegumes.push(value[0]);
+            if(value[1] > 1){
+                tabDoublons.push(value);
+            }
+        });
+
+        console.log(fruitEtLegumes);
+        console.table(tabDoublons);
+
+        /* faire du sale avec un pseudo tableau "associatif" */
+        let tabSale = [];
+        console.log(fruitEtLegumes2);
+        fruitEtLegumes2.map(function(value){
+            if(tabSale[value] === undefined){
+                tabSale[value] = 1;
+            }else{
+                tabSale[value] = tabSale[value] + 1;
+            }
+        });
+
+        console.table(tabSale);
+
+        /* faire du propre et évoluer POO en utlisant la classe Map() */
+
+        //fruitEtLegumes3
+        fruitEtLegumes3.sort();
+        let legumeDoublons = new Map();
+        for(value of fruitEtLegumes3){
+            if(!legumeDoublons.get(value)){
+                legumeDoublons.set(value, 1);
+            }else{
+                legumeDoublons.set(value, legumeDoublons.get(value) + 1);
+            }
+        }
+
+        console.log(legumeDoublons);
+        console.log(legumeDoublons.get('courgette'));
+
     </script>
 </head>
 
