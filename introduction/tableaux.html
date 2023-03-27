@@ -289,6 +289,14 @@
 
         let foundAll2 = arrayNum.filter((element)=> 20 <= element);
 
+        /*
+        les fonction de rappel (callback functions) ou fonctions 
+        anonymes génèrent des conséquences quand elles sont trop imbriqués 
+        c'est à surveiller lors de l'utilisation du this d'un objet 
+        dans les méthodes de l'objet
+        */
+
+
         console.log(foundAll2);
 
         console.log('---------------- les conséquences --------------');
@@ -313,6 +321,33 @@
         monObjet.affTab();
         console.log('---------------- affTab2 --------------');
         monObjet.affTab2();
+
+        /* 
+        créer un tableau avec des fruits et des légumes, avec deux fruits ou légumes en doublons 
+        modifier le tableau pour que : 
+            - les fruits et légumes soient triés par ordre alphabétiques
+            - que les doublons soient supprimés du tableau
+            - qu'on affiche un tableau des doublons et le nombre d'occurence de chaque doublons
+        */
+
+        let fruitEtLegumes = [
+            'fraise',
+            'bananes',
+            'mangue',
+            'choux',
+            'mangue',
+            'courgette',
+            'fraise',
+            'brocoli',
+            'haricot',
+            'mangue'
+        ];
+
+        console.log(fruitEtLegumes);
+        let tabTemp = [];
+        let tabDoublons = [];
+        
+        let tempFruit = '';
 
     </script>
 </head>
