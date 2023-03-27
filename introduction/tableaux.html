@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation JS - ES</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+        /* avant es6 */
+        /*
+        var tableau = new Array('donnée', 'data', 45);
+        console.log(tableau);
+        */
+
+        /* depuis es6 */
+        let cars = ['Peugeot', 'Citroën', 'Ford', 'Renault'];
+        console.log(cars);
+        console.log(cars.length);
+        console.log(cars[1]);
+        console.log(cars[cars.length]);
+        console.log(cars[cars.length - 1]);
+        console.log('le tableau cars contient ' + cars.length + ' élément(s)');
+        console.log(`
+        le tableau cars contient ${cars.length} élément(s)
+        cars est du type ${typeof cars}
+        indéxé de ${0} à ${cars.length - 1}
+        ` );
+
+        cars[cars.length] = 'Kya';
+        /* cars[25] = 'toto'; */
+        console.log(cars);
+
+        cars.push('Fiat');
+        cars.push('Seat', 'Opel', 'Hyundai', 'Audi');
+        console.log(cars);
+
+        /* les tableaux sont itérables */
+
+        /* Boucles */
+        /* Pour */
+
+        console.log('----------------- boucle for -----------------');
+        for (let i = 0; i < cars.length; i++) {
+            console.log(`la valeur à l'index ${i} est ${cars[i]} `);
+        }
+
+        console.log('----------------- boucle for in -----------------');
+        for (let index in cars) {
+            console.log(`la valeur à l'index ${index} est ${cars[index]} `);
+        }
+
+        /* depuis es6 */
+        console.log('----------------- boucle for of -----------------');
+        for (let value of cars) {
+            console.log(`la valeur actuelle dans cars est ${value} `);
+        }
+        
+        /* le for in permet aussi d'itérer sur les attributs et méthodes d'un objets */
+        
+        let obj = {
+            nom: 'Duflot',
+            prenom: 'Nicolas',
+            age: 42,
+            presentation: function () {
+                return `bonjour, je m'appelle ${this.prenom} ${this.nom}, j'ai ${this.age} ans`;
+            },
+            toto: {
+                titi: 'coucou',
+                ok: 42
+            }
+        }
+        
+        console.log(obj.presentation());
+        
+        for (let key in obj) {
+            console.log(`l'attribut ${key} contient ${obj[key]}`);
+            console.log(`l'attribut ${key} est du type ${typeof obj[key]}`);
+            if ('object' === typeof obj[key]) {
+                for (let subKey in obj[key]) {
+                    console.log(`l'attribut ${subKey} contient ${obj[key][subKey]}`);
+                    console.log(`l'attribut ${subKey} est du type ${typeof obj[key][subKey]}`);
+                }
+            }
+        }
+        
+        /* faire */
+        console.log('----------------- boucle while -----------------');
+        let cpt = 0;
+        while(cpt < cars.length){
+            console.log(`la valeur à l'index ${cpt} est ${cars[cpt]} `);
+            cpt++;
+        }
+
+        /* faire tant que */
+
+
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../introduction/index.html">Premiers scripts</a></li>
+                            <li><a class="dropdown-item" href="../introduction/tableaux.html">Les tableaux</a></li>
+                            <li><a class="dropdown-item" href="../introduction/fonctions.html">Les fonctions</a></li>
+                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La
+                                    destructuration</a></li>
+                            <li><a class="dropdown-item" href="../introduction/storage.html">Le storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            LE DOM
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../dom/index.html">DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM & CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Dataset</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            AJAX
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../ajax/index.html">Les promesses</a></li>
+                            <li><a class="dropdown-item" href="../ajax/fetch.html">AJAX avec Fetch()</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <div class="col">
+                <article class="card">
+                    <header class="card-header">
+                        <h2>Les tableaux</h2>
+                    </header>
+                    <main class="card-body">
+                        <p>
+                            Tout est dans la console
+                        </p>
+                    </main>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
