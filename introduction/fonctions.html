@@ -25,7 +25,7 @@
         fonction "simple" (sans paramètres d'appel) 
         */
 
-        function helloToi(){
+        function helloToi() {
             return 'Coucou';
         }
 
@@ -42,8 +42,7 @@
          * @param {string} nom
          * @param {number} age
         */
-        function helloYou(prenom = 'Jon', nom = 'Sno', age = 15)
-        {
+        function helloYou(prenom = 'Jon', nom = 'Sno', age = 15) {
             return `Hello ${prenom} ${nom}, looking good far a ${age} years old !`;
         }
 
@@ -52,16 +51,111 @@
 
         /* opérateur variadique OU SPREAD OPERATOR */
 
-        function addition(...tableau){
+        function addition(...tableau) {
             let resultat = 0;
-            for(value of tableau){
+            for (value of tableau) {
                 //resultat = resultat + parseFloat(value);
-                resultat = resultat + ((parseFloat(value))? parseFloat(value): 0 );
+                resultat = resultat + ((parseFloat(value)) ? parseFloat(value) : 0);
             }
             return resultat;
         }
 
-        console.log(addition(1, 2,3, 'toto',4,5,6,7,'8',9));
+        console.log(addition(1, 2, 3, 'toto', 4, 5, 6, 7, '8', 9));
+
+        /*
+        la structure de test try - catch permet de tester l'éxécution d'une fonction ou de code,
+        si cela fonctionne on sort du try après avoir éxécuté son code, si dans le try une erreur est relevée, 
+        elle est envoyée dans le catch, il faut donc la récupérer dans une variable qui est ensuite 
+        affichable
+        */
+
+        function testMajorite(age) {
+            if (age >= 18) {
+                let res = 'Personne majeure';
+            } else {
+                let res = 'Personne mineure';
+            }
+            return res;
+        }
+
+        try {
+            console.log(testMajorite(42));
+        } catch (error) {
+            console.log(error);
+            console.log(`Il y a une erreur : ${error}`);
+            console.error(`Il y a une erreur : ${error.name}`);
+            console.error(`Il y a une erreur : ${error.message}`);
+        }
+
+        console.log('toto');
+
+        /*
+        callback function, ou fonction de rappel ou encore fonction anonyme
+        */
+
+        let maFonctionAnonyme = function (name = null) {
+            return (null === name) ? 'Hello Kitty' : `Hello ${name}`;
+        }
+
+        console.log(maFonctionAnonyme());
+        console.log(maFonctionAnonyme('Toto'));
+
+        let test = function (valeur, index, tab) {
+            if (valeur % 2 === 0) {
+                tab[index] = valeur * 1.2;
+            } else {
+                tab[index] = valeur * 1.3;
+            }
+        }
+
+        let number = [1, 2, 3, 4, 5, 6];
+        let number2 = [1, 2, 3, 4, 5, 6];
+        let majoration = [150, 25, 46];
+        let majoration2 = [150, 25, 46];
+
+        console.log(number);
+        console.log(majoration);
+
+        number.forEach(test);
+        majoration.forEach(function (valeur, index, tab) {
+            if (valeur % 2 === 0) {
+                tab[index] = valeur * 1.2;
+            } else {
+                tab[index] = valeur * 1.3;
+            }
+        });
+
+        console.log(number);
+        console.log(majoration);
+
+        function majorationPaireImpaire(tableau) {
+            tableau.forEach(function (valeur, index, tab) {
+                if (valeur % 2 === 0) {
+                    tab[index] = valeur * 1.2;
+                } else {
+                    tab[index] = valeur * 1.3;
+                }
+            });
+            return tableau
+        }
+
+        console.log(majorationPaireImpaire(majoration2));
+
+        /* 
+        les fonction de callback anonymes peuvent être auto-éxécutée 
+        ( fonctionAnonyme(paramètres) )( contenu des paramètres );
+        */
+
+        (function (tableau) {
+            tableau.forEach(function (valeur, index, tab) {
+                if (valeur % 2 === 0) {
+                    tab[index] = valeur * 1.2;
+                } else {
+                    tab[index] = valeur * 1.3;
+                }
+            });
+            console.log(tableau);
+        })(number2);
 
     </script>
 </head>
