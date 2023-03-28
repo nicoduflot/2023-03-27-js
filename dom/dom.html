@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="../css/bootstrap.css" />
     <script src="../js/bootstrap.bundle.js"></script>
     <script>
-        window.addEventListener('DOMContentLoaded', function(){
+        window.addEventListener('DOMContentLoaded', function () {
             let numSpan = 1;
-            document.querySelector('#addSpan').addEventListener('click', function(){
+            document.querySelector('#addSpan').addEventListener('click', function () {
                 let span = document.createElement('span');
                 span.classList.add('col-sm-3', 'alert', 'alert-success', 'm-2');
                 let spanContent = document.createTextNode(`span n° ${numSpan}`);
                 numSpan = numSpan + 1;
                 span.append(spanContent);
-                span.addEventListener('click', function(){
+                span.addEventListener('click', function () {
                     this.remove();
                 });
                 document.querySelector('#test').append(span);
@@ -43,6 +43,75 @@
 
             */
 
+            function addItemList(value) {
+                let element = value;
+                let liste = document.querySelector('#liste ul');
+                
+                /* gestion des doublons */
+                let doublon = false;
+                let listLi = Array.from(liste.children);
+                
+                listLi.map(function (value) {
+                    if (value.textContent.toLowerCase() === element.toLowerCase()) {
+                        doublon = true;
+                        return;
+                    }
+                });
+
+                if (doublon) {
+                    return;
+                }
+                /* fin de gestion des doublons */
+
+                let li = document.createElement('li');
+                li.classList.add('list-group-item');
+                li.addEventListener('click', function () {
+                    this.remove();
+                });
+                li.append(document.createTextNode(element));
+                liste.append(li);
+            }
+
+            let inputItem = document.querySelector('#item');
+            inputItem.addEventListener('keyup', function (event) {
+                if (event.key === 'Enter') {
+                    if (inputItem.value.length > 0) {
+                        addItemList(inputItem.value);
+                        inputItem.value = '';
+                    }
+                }
+            });
+
+            let addItem = document.querySelector('#addItem');
+            addItem.addEventListener('click', function () {
+                if (inputItem.value.length > 0) {
+                    addItemList(inputItem.value);
+                    inputItem.value = '';
+                }
+                inputItem.focus();
+            });
+
+            document.querySelector('a.no-follow').addEventListener('click', function(event){
+                if(!document.querySelector('#OK-CGU').checked){
+                    event.preventDefault();
+                    document.querySelector('#POK-CGU').style.setProperty('display', 'block')
+                }
+            });
+
+            document.querySelector('#OK-CGU').addEventListener('change', function(){
+                if(document.querySelector('#OK-CGU').checked){
+                    document.querySelector('#POK-CGU').style.setProperty('display', 'none')
+                }
+            });
+
+            document.querySelector('button.preventDefault').addEventListener('click', function(event){
+                event.preventDefault();
+                let nom = document.querySelector('#testPreventDefault input[name="nom"]');
+                let prenom = document.querySelector('#testPreventDefault input[name="prenom"]');
+                if(nom.value !== '' && prenom.value !== ''){
+                    document.querySelector('#testPreventDefault').submit();
+                }
+            });
 
         });
     </script>
@@ -71,7 +140,8 @@
                             <li><a class="dropdown-item" href="../introduction/index.html">Premiers scripts</a></li>
                             <li><a class="dropdown-item" href="../introduction/tableaux.html">Les tableaux</a></li>
                             <li><a class="dropdown-item" href="../introduction/fonctions.html">Les fonctions</a></li>
-                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La destructuration</a></li>
+                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La
+                                    destructuration</a></li>
                             <li><a class="dropdown-item" href="../introduction/storage.html">Le storage</a></li>
                         </ul>
                     </li>
@@ -103,7 +173,7 @@
     </nav>
     <main class="container">
         <section class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 mt-2 mb-1">
                 <article class="card">
                     <header class="card-header">
                         <h2>Créer dans le DOM</h2>
@@ -120,7 +190,7 @@
                     </main>
                 </article>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 mt-1 mb-1">
                 <article class="card">
                     <header class="card-header">
                         <h2>Remplir une todo list</h2>
@@ -134,25 +204,69 @@
                                 Ajouter à la liste
                             </button>
                         </p>
-                        <div class="row" id="test">
-
-                        </div>
                     </main>
                 </article>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-6 mt-1 mb-1">
                 <article class="card">
                     <header class="card-header">
                         <h2>Ma liste</h2>
                     </header>
                     <main class="card-body">
                         <div class="row" id="liste">
+                            <ul class="list-group">
 
+                            </ul>
                         </div>
+                    </main>
+                </article>
+            </div>
+            <div class="col-lg-6">
+                <article>
+                    <header>
+                        <h2>PreventDefault()</h2>
+                    </header>
+                    <main>
+                        <p>
+                            Le PreventDefault permet d'arrêter le comportement
+                            automatique de certaines actions, notemment les submit de formulaires,
+                            mais aussi le comportement normal d'un lien.
+                        </p>
+                        <p class="form-check">
+                            <input type="checkbox" name="OK-CGU" id="OK-CGU"/> 
+                            <label for="OK-CGU">Valider les CGU pour aller à l'accueil</label>
+                            <a href="../index.html" class="no-follow">Accueil</a>
+                        </p>
+                        <div id="POK-CGU" class="alert alert-warning" style="display: none;">
+                            Il faut valider les CGU pour accéder à l'accueil
+                        </div>
+                        <form id="testPreventDefault" method="get" action="">
+                            <fieldset>
+                                <legend>Civilité</legend>
+                                <p>
+                                    <label class="form-label">
+                                        Nom
+                                    </label>
+                                    <input type="text" class="form-control" name="nom" />
+                                </p>
+                                <p>
+                                    <label class="form-label">
+                                        Prénom
+                                    </label>
+                                    <input type="text" class="form-control" name="prenom" />
+                                </p>
+                            </fieldset>
+                            <p>
+                                <button type="submit" class="btn btn-success preventDefault">
+                                    Soumettre le formulaire
+                                </button>
+                            </p>
+                        </form>
                     </main>
                 </article>
             </div>
         </section>
     </main>
 </body>
+
 </html>

@@ -19,7 +19,13 @@
                 `;
             });
 
-            document.querySelector('#checkP').addEventListener('click', function(){
+            document.querySelector('#checkP').addEventListener('click', function(event){
+                /* 
+                le clic sur le bouton ne déclenche pas le clic sur la page, 
+                l'évènement est stoppé juste après le clic sur le boutton, on évite ainsi 
+                le "bubbling" propre aux clics "superposés"
+                */
+                event.stopPropagation();
                 console.log(document.querySelectorAll('p'));
             });
 
