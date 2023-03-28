@@ -9,7 +9,110 @@
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/scripts.js"></script>
     <script>
+        let liste = [1,2,3,4];
+        /* assigner les valeurs du tableau dans l'ordre dans les variables suivantes a, b, c */
+        /*
+        let a = liste[0]
+        */
+        let [a, b, c] = liste;
+        console.log(`a : ${a}, b : ${b}, c : ${c}`);
+
+        let [d, , f, g] = liste;
+        console.log(`d : ${d}, f : ${f}, g : ${g}`);
+
+        let [h, i, j, k = 0, l = 12] = liste;
+        console.log(`h : ${h}, i : ${i}, j : ${j}, k : ${k}, l : ${l}`);
+        h = 24;
+        console.log(`h : ${h}, i : ${i}, j : ${j}, k : ${k}, l : ${l}`);
+
+        let [toto = 'toto', tata = 'tata', titi = 'titi'] = [];
+        console.log(toto, tata, titi);
+
+        function truc(unTruc = 12, uneOption = false, ...valeurs){
+            let [a = 0, b = false, c = 'Compta'] = valeurs;
+            console.log(unTruc, uneOption, a, b, c);
+        }
+
+        truc();
+        truc(13, true);
+        truc(14, true, true, 'RH', 'toto');
+
+        /*
+        echanger les valeurs de deux variables
+        */
+
+        let number1 = 42;
+        let number2 = 100;
+        /*
+        let tampon = number1;
+        number1 = number2;
+        number2 = tampon;
+        */
+
+        console.log(`avant échange, number1 : ${number1}, number2 : ${number2}`);
+        [number1, number2] = [number2, number1];
+        console.log(`après échange, number1 : ${number1}, number2 : ${number2}`);
+
+        /* la destructuration avec l'objet */
+
+        let objet = {
+            lastName: 'Sno',
+            firstName: 'Jon',
+            job: 'NightWatch',
+            knowledge: function(prenom = 'you', nom = 'moron'){
+                return `You know not'in ${prenom} ${nom}`;
+            }
+        };
+
+        console.log(objet.lastName, objet.firstName, objet.knowledge());
         
+        let {firstName, lastName, knowledge} = objet;
+        
+        console.log(lastName, firstName, knowledge());
+        
+        let {
+            firstName: prenom, 
+            lastName: nom, 
+            knowledge: savoir
+        } = objet;
+        
+        console.log(nom, prenom, savoir());
+
+        let personnage1 = {
+            nomHeros: 'LeCanard',
+            prenomHeros: 'Herbert',
+            coupSpecial: function () {
+                return 'Pichenette';
+            }
+        };
+
+        let personnage2 = {
+            nomHeros: 'LeDragon',
+            prenomHeros: 'Marvin',
+            coupSpecial: function () {
+                return 'TongDeum !';
+            }
+        };
+
+        console.log(`
+personnage1.nomHeros: ${personnage1.nomHeros},
+personnage1.coupSpecial: ${personnage1.coupSpecial()}
+
+personnage2.nomHeros: ${personnage2.nomHeros},
+personnage2.coupSpecial: ${personnage2.coupSpecial()}
+        `);
+
+        [personnage1.coupSpecial, personnage2.coupSpecial]=[personnage2.coupSpecial, personnage1.coupSpecial];
+
+        console.log(`
+personnage1.nomHeros: ${personnage1.nomHeros},
+personnage1.coupSpecial: ${personnage1.coupSpecial()}
+
+personnage2.nomHeros: ${personnage2.nomHeros},
+personnage2.coupSpecial: ${personnage2.coupSpecial()}
+        `);
+
+
     </script>
 </head>
 
