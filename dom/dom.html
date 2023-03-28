@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation JS - ES</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            let numSpan = 1;
+            document.querySelector('#addSpan').addEventListener('click', function(){
+                let span = document.createElement('span');
+                span.classList.add('col-sm-3', 'alert', 'alert-success', 'm-2');
+                let spanContent = document.createTextNode(`span n° ${numSpan}`);
+                numSpan = numSpan + 1;
+                span.append(spanContent);
+                span.addEventListener('click', function(){
+                    this.remove();
+                });
+                document.querySelector('#test').append(span);
+            });
+
+            // todo list
+            /*
+            les éléments de la liste seront renseignés dans l'input, 
+                - sur la touche Entrée ou un clic sur le bouton "ajouter"
+                    - on ajoute l'élément à la liste, et on vide le champs de saisie.
+
+                - dans la liste, un clic sur un élément de cette liste le supprime
+
+                Pour les warrior·ess
+                - on vérifiera si un élément renseigné n'est déjà pas dans la liste
+                    - le cas échéant il ne sera pas ajouté en doublon
+
+            fonction ajout
+
+            déclencheur touche entrée sur input
+                => ajout
+            déclenceur click sur bouton
+                => ajout
+
+            */
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../introduction/index.html">Premiers scripts</a></li>
+                            <li><a class="dropdown-item" href="../introduction/tableaux.html">Les tableaux</a></li>
+                            <li><a class="dropdown-item" href="../introduction/fonctions.html">Les fonctions</a></li>
+                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La destructuration</a></li>
+                            <li><a class="dropdown-item" href="../introduction/storage.html">Le storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            LE DOM
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../dom/index.html">DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM & CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Dataset</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            AJAX
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../ajax/index.html">Les promesses</a></li>
+                            <li><a class="dropdown-item" href="../ajax/fetch.html">AJAX avec Fetch()</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <div class="col-lg-12">
+                <article class="card">
+                    <header class="card-header">
+                        <h2>Créer dans le DOM</h2>
+                    </header>
+                    <main class="card-body">
+                        <p>
+                            <button id="addSpan" class="btn btn-outline-secondary">
+                                Ajouter span à la div #test
+                            </button>
+                        </p>
+                        <div class="row" id="test">
+
+                        </div>
+                    </main>
+                </article>
+            </div>
+            <div class="col-lg-6">
+                <article class="card">
+                    <header class="card-header">
+                        <h2>Remplir une todo list</h2>
+                    </header>
+                    <main class="card-body">
+                        <p>
+                            <input type="text" class="form-control" id="item" />
+                        </p>
+                        <p>
+                            <button id="addItem" class="btn btn-outline-secondary">
+                                Ajouter à la liste
+                            </button>
+                        </p>
+                        <div class="row" id="test">
+
+                        </div>
+                    </main>
+                </article>
+            </div>
+            <div class="col-lg-12">
+                <article class="card">
+                    <header class="card-header">
+                        <h2>Ma liste</h2>
+                    </header>
+                    <main class="card-body">
+                        <div class="row" id="liste">
+
+                        </div>
+                    </main>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
