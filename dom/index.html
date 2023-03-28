@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation JS - ES</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            let ouEstLeClic = document.querySelector('#ouEstLeClic');
+            document.addEventListener('click', function(event){
+                //console.log(event.offsetX);
+                //console.log(event.offsetY);
+                ouEstLeClic.innerHTML = `
+<b>X : ${event.offsetX}</b><br />
+<b>Y : ${event.offsetY}</b>
+                `;
+            });
+
+            document.querySelector('#checkP').addEventListener('click', function(){
+                console.log(document.querySelectorAll('p'));
+            });
+
+            document.querySelectorAll('p:not(#special)').forEach((paragraphe)=>{
+                /* on utilise => pour ne pas perdre que this === paragraphe */
+                paragraphe.addEventListener('click', function(){
+                    /* 
+                    comme on a utilisé => pour le lien this précédent, ici on ne peut pas l'utiliser por garder le lien this précédent 
+                    */
+                    document.querySelector('#showP').innerHTML = this.innerHTML;
+                });
+            });
+
+            let imgOver = document.querySelector('#imgOver');
+
+            imgOver.addEventListener('mouseenter', function(){
+                this.setAttribute('src', '../images/pip-boy-thumb-up.png')
+            });
+            
+            imgOver.addEventListener('mouseleave', function(){
+                this.setAttribute('src', '../images/pip-boy-thumb-down.png')
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../introduction/index.html">Premiers scripts</a></li>
+                            <li><a class="dropdown-item" href="../introduction/tableaux.html">Les tableaux</a></li>
+                            <li><a class="dropdown-item" href="../introduction/fonctions.html">Les fonctions</a></li>
+                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La destructuration</a></li>
+                            <li><a class="dropdown-item" href="../introduction/storage.html">Le storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            LE DOM
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../dom/index.html">DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM & CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Dataset</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            AJAX
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../ajax/index.html">Les promesses</a></li>
+                            <li><a class="dropdown-item" href="../ajax/fetch.html">AJAX avec Fetch()</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <div class="col">
+                <article class="card">
+                    <header class="card-header">
+                        <h2 class="titreChapitre">DOM : Document Object Model</h2>
+                    </header>
+                    <main class="card-body">
+                        <h3 class="titreChapitre">Définition</h3>
+                        <p>
+                            Le <b>DOM</b> nous permet de repérer, analyser, modifier et supprimer des éléments de la page HTML.
+                        </p>
+                        <p>
+                            Il faut que tous les éléments du DOM soient chargés pour pouvoir intervenir dessus.
+                            On "écoute" le navigateur et on "guette" l'évènement qui corresponds à la fin de chargement de la page.
+                        </p>
+                        <div id="ouEstLeClic">
+
+                        </div>
+                        <h3 class="titreChapitre">Agir sur le DOM</h3>
+                        <ul>
+                            <li>Il faut connaître l'élément surveillé</li>
+                            <li>Il faut connaître l'évènement écouté : déclencheur</li>
+                        </ul>
+                        <p>
+                            <button class="btn btn-outline-secondary" id="checkP">
+                                tester les paragraphes
+                            </button>
+                        </p>
+                        <div id="showP" style="border: 1px solid lightgreen; border-radius: 5px;">
+
+                        </div>
+                        <p id="special">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, fugit iusto provident ratione pariatur ipsam ducimus ab iste, modi sunt vel? Commodi perferendis, quo vero dicta voluptate voluptatum? Ratione, earum!
+                        </p>
+                        <figure>
+                            <img src="../images/pip-boy-thumb-down.png" id="imgOver" width="200" />
+                            <figcaption>
+                                Pip boy sans son bras
+                            </figcaption>
+                        </figure>
+                    </main>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
