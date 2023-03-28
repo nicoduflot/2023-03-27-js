@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.css" />
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/dfd-scripts.js"></script>
+    <script src="../js/scripts.js"></script>
     <script>
         console.log('début chargement de la page');
         loaded(function(){
@@ -108,6 +109,32 @@
                 - modifier le cookie s'il existe déjà
                 - supprimer
             */
+
+            let cookieValue = q('#cookieValue');
+            let btnCookie = q('#btnCookie');
+            let btnClearCookie = q('#btnClearCookie');
+            let dataCookie = q('#dataCookie');
+
+            if(getCookie('userName')){
+                dataCookie.innerHTML = `<b>${getCookie('userName')}</b>`;
+            }
+
+            btnCookie.addEventListener('click', function(event){
+                //console.log(event);
+                if('' !== cookieValue.value){
+                    setCookie('userName', cookieValue.value, 1);
+                    dataCookie.innerHTML = `<b>${getCookie('userName')}</b>`;
+                    cookieValue.value = '';
+                    console.log(document.cookie);
+                }
+            });
+            
+            btnClearCookie.addEventListener('click', function(){
+                setCookie('userName');
+                dataCookie.innerHTML = '';
+                console.log(document.cookie);
+            });
+
         });
     </script>
 </head>
