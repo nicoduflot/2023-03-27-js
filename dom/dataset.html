@@ -11,7 +11,58 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script>
         loaded(function () {
-            
+            let pDataModule = q('p[data-module]');
+            console.log(pDataModule);
+            pDataModule.forEach(element => {
+                switch(element.dataset.module){
+                    case 'color': 
+                        let color = element.dataset.color || '#f00';
+                        element.addEventListener('mouseenter', function(){
+                            this.style.setProperty('color', color);
+                        });
+                        element.addEventListener('mouseleave', function(){
+                            this.style.removeProperty('color');
+                        });
+                    break;
+                    case 'font': 
+                    case 'magie':
+                        let weight = element.dataset.weight || 'lighter';
+                        element.addEventListener('mouseenter', function(){
+                            this.style.setProperty('font-weight', weight);
+                        });
+                        element.addEventListener('mouseleave', function(){
+                            this.style.removeProperty('font-weight');
+                        });
+                    break;
+                    case 'after':
+                    default: 
+                        /* code */
+                }
+            });
+
+            let coordonnees = q('td[data-line][data-column]');
+            //console.log(coordonnees);
+            coordonnees.forEach(element=>{
+                element.addEventListener('mouseenter', function(){
+                    let line = element.dataset.line;
+                    //console.log(line);
+                    element.parentNode.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+                    let column = element.dataset.column;
+                    q(`td[data-column="${column}"]`).forEach(td=>{
+                        td.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+                    });
+                });
+                element.addEventListener('mouseleave', function(){
+                    let line = element.dataset.line;
+                    //console.log(line);
+                    element.parentNode.style.removeProperty('background-color');
+                    let column = element.dataset.column;
+                    q(`td[data-column="${column}"]`).forEach(td=>{
+                        td.style.removeProperty('background-color');
+                    });
+                });
+            });
+
         });
     </script>
 </head>
