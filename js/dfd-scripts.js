@@ -42,7 +42,7 @@ function q(selector){
  * 
  * @param {string} element  - tagname of the html element
  * @param {object} options  - option for the html element attributes
- * @param {string} parent   - selector for the html element parent when added as a child element
+ * @param {string} parent   - the parent DOM Object /!\ NOT THE SELECTOR /!\
  */
 function cEO(element, options = {}, parent = null){
     let newElement = document.createElement(element);
@@ -55,7 +55,7 @@ function cEO(element, options = {}, parent = null){
         }      
     }
     if(null !== parent){
-        q(parent).appendChild(newElement)
+        parent.appendChild(newElement)
     }
     return newElement;
 }
