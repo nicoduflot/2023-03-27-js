@@ -11,7 +11,59 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script>
         loaded(function () {
-            
+
+            console.log(Math.random());
+            console.log(Math.floor(Math.random()*3+1));
+
+            /*
+            Promise = créer une fonction asynchrone dont l'éxécution ne stoppe pas 
+            ou ne "fige" pas l'utilisation de la page
+
+            on appelle une fonction asynchrone
+            cette fonction va lancer une fonction qui est une promesse, 
+            cette promesse est qu'elle renvoi un résultat quoi que soit l'issue de son traitement
+            La fonction asynchrone est en attente de réponse de la promesse qui prend du temps et 
+            qui pourrai figer la page
+            */
+
+            /* la fonction asynchrone */
+
+            async function asynchCall(){
+                /* la fonction asynchrone attend la réponse d'une fonction qui retournera un promesse */
+                let resCall = await resolveAfterXseconds(0.1);
+                return resCall;
+            }
+
+            function resolveAfterXseconds(delay){
+                let randError = Math.floor(Math.random() * 3 + 1);
+
+                return new Promise(function(resolve, reject){
+                    setTimeout(function(){
+                        if(2 !== randError){
+                            resolve('Le formateur aime les jeux de rôle');
+                        }else{
+                            reject('L\'information n\'est ni importante')
+                        }
+                    }, delay * 1000);
+                });
+            }
+
+            q('#btn').addEventListener('click', function(){
+                asynchCall()
+                .then(function(message){
+                    console.log(message);
+                })
+                .then(function(){
+                    console.log('ça a bien marché');
+                })
+                .catch(function(message){
+                    console.error(message);
+                })
+                .finally(function(){
+                    console.log('l\'appel asynchrone est fini');
+                });
+            });
+
         });
     </script>
 </head>
