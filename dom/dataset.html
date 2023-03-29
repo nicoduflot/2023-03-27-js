@@ -40,6 +40,8 @@
                 }
             });
 
+            let spanCoord = q('#xy');
+
             let coordonnees = q('td[data-line][data-column]');
             //console.log(coordonnees);
             coordonnees.forEach(element=>{
@@ -51,6 +53,7 @@
                     q(`td[data-column="${column}"]`).forEach(td=>{
                         td.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
                     });
+                    spanCoord.innerHTML = `x : &nbsp;<b>${column}</b> - y : &nbsp;<b>${line}</b>`;
                 });
                 element.addEventListener('mouseleave', function(){
                     let line = element.dataset.line;
@@ -60,6 +63,23 @@
                     q(`td[data-column="${column}"]`).forEach(td=>{
                         td.style.removeProperty('background-color');
                     });
+                    spanCoord.innerHTML = `x : &nbsp; - y : &nbsp;`;
+                });
+            });
+
+            let colorNow = 'bg-danger';
+            q('#p4 th').forEach(th=>{
+                th.addEventListener('click', function(){
+                    let coord = th.dataset.col;
+                    //console.log(coord);
+                    for(i = 6; i > 0; i--){
+                        let cell = q(`td[data-col="${coord}"][data-row="${i}"]`);
+                        if(!cell.classList.contains('bg-danger') && !cell.classList.contains('bg-primary')){
+                            cell.classList.add(colorNow);
+                            colorNow = ('bg-danger' === colorNow )? 'bg-primary' : 'bg-danger' ;
+                            break;
+                        }
+                    }
                 });
             });
 
