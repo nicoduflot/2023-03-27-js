@@ -83,6 +83,13 @@
                 });
             });
 
+            q('#resetP4').addEventListener('click', function(){
+                q('#p4 td[data-col][data-row]').forEach(td=>{
+                    td.classList.remove('bg-danger');
+                    td.classList.remove('bg-primary');
+                });
+            });
+
         });
     </script>
 </head>
