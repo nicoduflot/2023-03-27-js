@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation JS - ES</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/dfd-scripts.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script>
+        loaded(function () {
+
+            thead = q('#result thead');
+            tableau = q('#result');
+
+            function convertDate(dateComp){
+                const dateInput = new Date(dateComp);
+                let dateOutput = '';
+                dateOutput = dateInput.getDate().toString().padStart(2, 0);
+                dateOutput = dateOutput + '/'+(dateInput.getMonth()+1).toString().padStart(2, 0);
+                dateOutput = dateOutput + '/'+dateInput.getFullYear().toString();
+                return dateOutput;
+            }
+
+            console.log(convertDate('2022-05-03'));
+            function movieReviewTable(data, search = '') {
+
+                console.log(data);
+                search = search.toLowerCase();
+                let searchOK = ('' === search) ? true : false;
+                let compare = '';
+
+                let thead = cEO('tr');
+                let tbody = cEO('tbody');
+                let premierTour = false;
+                data.forEach(element => {
+                    let tr = cEO('tr');
+                    let thTitle = cEO('th', {'class':[''], scope: 'row'}, tr);
+                    cTN(element.display_title, thTitle);
+                    let tdRating = cEO('td', {'class':['']}, tr);
+                    let mpaaR = '<b>MPAA</b><br />';
+                    mpaaR = mpaaR + ((element.mpaa_rating !== '')? element.mpaa_rating : 'Non attribué');
+                    mpaaR = mpaaR + `<br /><b>Date de sortie : </b><br />${convertDate(element.opening_date)}`;
+                    tdRating.innerHTML = mpaaR;
+                    let tdCritic = cEO('td', {}, tr);
+                    let crit = `<h2>${element.headline}</h2>`;
+                    crit = crit + `<p>by ${element.byline}</p>`;
+                    crit = crit + `<p>${element.summary_short}</p>`;
+                    if(element.link.type === 'article'){
+                        crit = crit + `<p><a href="${element.link.url}" target="_blank">${element.link.suggested_link_text}</a></p>`;
+                    }
+                    if(element.multimedia.type === 'mediumThreeByTwo210'){
+                        let multimedia = cEO('img', {style: [`max-width: 100%`], src: element.multimedia.src})
+                        thTitle.append(multimedia);
+                    }
+                    tdCritic.innerHTML = crit;
+                    for (key in element) {
+                        if (typeof element[key] !== 'object') {
+                            compare = element[key].toString().toLowerCase();
+                            if (compare.indexOf(search) >= 0) {
+
+                                searchOk = true;
+                            }
+                        } else {
+                            for (subKey in element[key]) {
+                                if (typeof element[key][subKey] !== 'object') {
+                                    compare = element[key][subKey].toString().toLowerCase();
+                                    if (compare.indexOf(search) >= 0) {
+                                        searchOk = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    premierTour = false;
+                    if (searchOk) {
+                        tbody.append(tr);
+                    } else {
+                        tr.remove();
+                    }
+                    searchOk = false;
+                    searchOK = ('' === search) ? true : false;
+                });
+
+                return [thead, tbody];
+            }
+
+
+            q('button.readNYT').addEventListener('click', function () {
+                fetch(this.dataset.url)
+                    .then(reponse => reponse.json())
+                    .then(data => {
+                        //console.log(data);
+                        //console.log(thead.children);
+                        let tabResult = movieReviewTable(data.results);
+                        tableau.replaceChildren(cEO(null));
+                        thead.replaceChildren(tabResult[0]); tableau.append(thead);
+                        tableau.append(tabResult[1]);
+                        //console.log(thead.children);
+                    });
+
+            });
+
+            q('#searchNYT').addEventListener('keyup', function () {
+                if (q('#searchNYT').value.length > 2) {
+                    fetch('https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL')
+                        .then(reponse => reponse.json())
+                        .then(data => {
+                            q('#rawJson').innerHTML = '<b>cool</b>';
+                            let tabResult = movieReviewTable(data.results, q('#searchNYT').value);
+                            tableau.replaceChildren(cEO(null));
+                            thead.replaceChildren(tabResult[0]); tableau.append(thead);
+                            tableau.append(tabResult[1]);
+                        });
+                }
+            });
+
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Introduction
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../introduction/index.html">Premiers scripts</a></li>
+                            <li><a class="dropdown-item" href="../introduction/tableaux.html">Les tableaux</a></li>
+                            <li><a class="dropdown-item" href="../introduction/fonctions.html">Les fonctions</a></li>
+                            <li><a class="dropdown-item" href="../introduction/destructuration.html">La
+                                    destructuration</a></li>
+                            <li><a class="dropdown-item" href="../introduction/storage.html">Le storage</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            LE DOM
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../dom/index.html">DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/dom.html">Créer dans le DOM</a></li>
+                            <li><a class="dropdown-item" href="../dom/css.html">DOM & CSS</a></li>
+                            <li><a class="dropdown-item" href="../dom/dataset.html">Dataset</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            AJAX
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../ajax/index.html">Les promesses</a></li>
+                            <li><a class="dropdown-item" href="../ajax/fetch.html">AJAX avec Fetch()</a></li>
+                            <li><a class="dropdown-item" href="../ajax/fetch-nyt.html">Fetch nyt</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="row">
+            <div class="col-lg-8">
+                <article>
+                    <header>
+                        <h2>
+                            Fetch NYT
+                        </h2>
+                    </header>
+                    <main>
+                        <p>
+                            <button class="btn btn-secondary btn-sm readNYT"
+                                data-url="https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL">
+                                movie re nyt
+                            </button>
+                        </p>
+                    </main>
+                </article>
+            </div>
+            <div class="col-lg-4">
+                <article>
+                    <header>
+                        <h2>Suggestion articles</h2>
+                    </header>
+                    <main>
+                        <h3>articles dans nYT</h3>
+                        <p>
+                            <input type="text" id="searchNYT" value="" class="form-control" />
+                        </p>
+                    </main>
+                </article>
+            </div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-lg-12">
+                <article>
+                    <div id="rawJson">
+
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-lg-12">
+                <article>
+                    <div class="table-responsive-sm">
+                        <table id="result" class="table table-striped">
+                            <thead class="table-dark">
+    
+                            </thead>
+                            <tbody>
+    
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

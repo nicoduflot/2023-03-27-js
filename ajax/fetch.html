@@ -34,21 +34,22 @@
                 console.error(error);
             });
 
-            
+            */
 
-            fetch('../resource/users.json')
+            fetch('https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL')
             .then(function(reponse){
                 console.log(reponse);
                 return reponse.json();
             })
             .then(function(data){
                 console.log(data);
-                data.forEach(element => {
+                console.log(data.results);
+                /*data.forEach(element => {
                     console.log(element);
-                });
+                });*/
             })
 
-            */
+            
 
             thead = q('#result thead');
             tableau = q('#result');
@@ -80,7 +81,7 @@
                             }
                             let td = cEO('td', {}, tr);
                             //cTN(element[key], td);
-                            td.innerHTML = td.innerHTML + `${key} : ${element[key]}<br />`;
+                            td.innerHTML = td.innerHTML + `${element[key]}<br />`;
                         } else {
                             //console.log(key);
                             if (premierTour) {
@@ -128,6 +129,21 @@
                     });
                 });
             });
+            
+            q('button.readNYT').addEventListener('click', function () {
+                    fetch(this.dataset.url)
+                    .then(reponse => reponse.json())
+                    .then(data => {
+                        //console.log(data);
+                        //console.log(thead.children);
+                        let tabResult = jsonTableFetch(data.results);
+                        tableau.replaceChildren(cEO(null));
+                        thead.replaceChildren(tabResult[0]); tableau.append(thead);
+                        tableau.append(tabResult[1]);
+                        //console.log(thead.children);
+                    });
+
+            });
 
             q('#searchUser').addEventListener('keyup', function(){
                 if(q('#searchUser').value.length > 2){
@@ -145,7 +161,11 @@
             let play = q('#play');
             let ff1s = q('#ff1s');
             let rw1s = q('#rw1s');
+            let start = q('#start');
             let video = q('video')
+            let videoProgress = q('#videoProgress');
+
+            console.log(video.parentNode.childNodes[1]);
 
             play.addEventListener('click', function(){
                 if(video.paused){
@@ -163,6 +183,10 @@
             
             rw1s.addEventListener('click', function(){
                 video.currentTime = video.currentTime - 1;
+            });
+            
+            start.addEventListener('click', function(){
+                video.currentTime = 0;
             });
 
         });
@@ -217,6 +241,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="../ajax/index.html">Les promesses</a></li>
                             <li><a class="dropdown-item" href="../ajax/fetch.html">AJAX avec Fetch()</a></li>
+                            <li><a class="dropdown-item" href="../ajax/fetch-nyt.html">Fetch nyt</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -243,6 +268,9 @@
                             </button>
                             <button class="btn btn-secondary btn-sm read" data-url="../resource/posts.json">
                                 posts.json
+                            </button>
+                            <button class="btn btn-secondary btn-sm readNYT" data-url="https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL">
+                                movie re nyt
                             </button>
                             <button class="btn btn-secondary btn-sm read" data-url="../resources/users.json">
                                 Users.json erreur
@@ -286,9 +314,12 @@
         <section>
             <div class="col-lg-12">
                 <article>
-                    <video>
+                    <video preload="auto">
                         <source src="../media/Big_Buck_Bunny_360_10s_1MB.mp4" />
                     </video>
+                    <div class="progress mt-1 mb-2" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                        <div id="videoProgress" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+                      </div>
                     <div class="controls">
                         <button id="play" class="btn btn-outline-primary pause">
                             Lire / Pause
