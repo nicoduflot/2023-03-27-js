@@ -48,13 +48,13 @@
                     let crit = `<h2>${element.headline}</h2>`;
                     crit = crit + `<p>by ${element.byline}</p>`;
                     crit = crit + `<p>${element.summary_short}</p>`;
-                    if(element.link.type === 'article'){
+                    /*if(element.link.type === 'article'){
                         crit = crit + `<p><a href="${element.link.url}" target="_blank">${element.link.suggested_link_text}</a></p>`;
-                    }
-                    if(element.multimedia.type === 'mediumThreeByTwo210'){
+                    }*/
+                    /*if(element.multimedia.type === 'mediumThreeByTwo210'){
                         let multimedia = cEO('img', {style: [`max-width: 100%`], src: element.multimedia.src})
                         thTitle.append(multimedia);
-                    }
+                    }*/
                     tdCritic.innerHTML = crit;
                     for (key in element) {
                         if (typeof element[key] !== 'object') {
@@ -105,7 +105,8 @@
 
             q('#searchNYT').addEventListener('keyup', function () {
                 if (q('#searchNYT').value.length > 2) {
-                    fetch('https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL')
+                    /*fetch('https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL')*/
+                    fetch('https://api.nytimes.com/svc/books/v3/reviews.json?author=Stephen+King&api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL')
                         .then(reponse => reponse.json())
                         .then(data => {
                             q('#rawJson').innerHTML = '<b>cool</b>';
@@ -190,8 +191,8 @@
                     <main>
                         <p>
                             <button class="btn btn-secondary btn-sm readNYT"
-                                data-url="https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL">
-                                movie re nyt
+                                data-url="https://api.nytimes.com/svc/books/v3/reviews.json?author=Stephen+King&api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL">
+                                Stephen King's Books nyt
                             </button>
                         </p>
                     </main>

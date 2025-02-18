@@ -36,7 +36,7 @@
 
             */
 
-            fetch('https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL')
+            fetch('https://api.nytimes.com/svc/books/v3/reviews.json?author=Stephen+King&api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL')
             .then(function(reponse){
                 console.log(reponse);
                 return reponse.json();
@@ -47,9 +47,7 @@
                 /*data.forEach(element => {
                     console.log(element);
                 });*/
-            })
-
-            
+            });
 
             thead = q('#result thead');
             tableau = q('#result');
@@ -269,7 +267,7 @@
                             <button class="btn btn-secondary btn-sm read" data-url="../resource/posts.json">
                                 posts.json
                             </button>
-                            <button class="btn btn-secondary btn-sm readNYT" data-url="https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL">
+                            <button class="btn btn-secondary btn-sm readNYT" data-url="https://api.nytimes.com/svc/books/v3/reviews.json?author=Stephen+King&api-key=ig9jmatc6vzPGucCPAC9aK9v0xxGDdkL">
                                 movie re nyt
                             </button>
                             <button class="btn btn-secondary btn-sm read" data-url="../resources/users.json">
